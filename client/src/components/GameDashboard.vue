@@ -4,9 +4,7 @@
       <GameboardContainer
         v-if="shouldDisplayGame"
       />
-      <!--    <NewRound v-if="gamePhase === phase.newRound" />-->
-      <Defeat v-if="gamePhase === phase.defeat"/>
-      <Victory v-if="gamePhase === phase.victory"/>
+      <GameOver />
     </b-row>
   </b-container>
 </template>
@@ -14,17 +12,13 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import GameboardContainer from '@port-of-mars/client/components/root/GameboardContainer.vue';
-import Victory from '@port-of-mars/client/components/root/Victory.vue';
-import Defeat from '@port-of-mars/client/components/root/Defeat.vue';
-import NewRound from '@port-of-mars/client/components/game/phases/NewRound.vue';
+import GameOver from '@port-of-mars/client/components/root/GameOver.vue';
 import {Phase} from '@port-of-mars/shared/types';
 
 @Component({
   components: {
     GameboardContainer,
-    Victory,
-    Defeat,
-    NewRound
+    GameOver
   },
 })
 export default class GameDashboard extends Vue {

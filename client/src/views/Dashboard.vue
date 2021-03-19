@@ -1,69 +1,60 @@
 <template>
-  <b-container class="vh-100 p-0 m-0" fluid>
-    <b-navbar fixed toggleable="lg" type="dark" variant="secondary">
-      <b-navbar-brand href="#/dashboard"><h4 class="text-uppercase">Player Dashboard</h4></b-navbar-brand>
+  <b-container fluid class="h-100 p-0 m-0">
+    <b-row class="w-100 m-0 p-3 align-items-center" style="background-color: var(--light-shade)">
+      <h2 style="color: var(--dark-shade)">Player Dashboard</h2>
+      <b-nav pills class="mx-5">
+        <b-nav-item-dropdown>
+          <b-dropdown-text variant="info">
+            {{ username }}
+          </b-dropdown-text>
+          <b-dropdown-divider></b-dropdown-divider>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+          <!-- Using 'button-content' slot -->
+          <template v-slot:button-content>
+            <em>
+              <b-icon-person-fill variant="info" class="my-auto"></b-icon-person-fill>
+            </em>
+          </template>
 
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav class="px-3">
-          <b-nav-item @click="switchTab('participate')">Participate</b-nav-item>
-          <b-nav-item @click="switchTab('stats')">Your Stats</b-nav-item>
-        </b-navbar-nav>
-
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-
-          <b-nav-item-dropdown right>
-            <b-dropdown-text variant="info">
-              {{ username }}
-            </b-dropdown-text>
-            <b-dropdown-divider></b-dropdown-divider>
-
-            <!-- Using 'button-content' slot -->
-            <template v-slot:button-content>
-              <em>
-                <b-icon-person-fill variant="light"></b-icon-person-fill>
-              </em>
-            </template>
-
-            <router-link :to="'register'">
-              <b-dropdown-item-button>
-                Change Consent or Email
-              </b-dropdown-item-button>
-            </router-link>
-            <router-link :to="'tutorial'">
-              <b-dropdown-item-button>
-                Tutorial
-              </b-dropdown-item-button>
-            </router-link>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item-button variant="danger" @click="logout">Logout</b-dropdown-item-button>
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-
-    <b-row class="text-center">
+          <router-link :to="'register'">
+            <b-dropdown-item-button>
+              Change Consent or Email
+            </b-dropdown-item-button>
+          </router-link>
+          <router-link :to="'tutorial'">
+            <b-dropdown-item-button>
+              Tutorial
+            </b-dropdown-item-button>
+          </router-link>
+          <b-dropdown-divider></b-dropdown-divider>
+          <b-dropdown-item-button variant="danger" @click="logout">Logout</b-dropdown-item-button>
+        </b-nav-item-dropdown>
+        <b-nav-item :active="view === 'participate'" @click="switchTab('participate')" class="mx-4">
+          <span style="color: var(--dark-shade)">Participate</span>
+        </b-nav-item>
+        <b-nav-item :active="view === 'stats'" @click="switchTab('stats')">
+          <span style="color: var(--dark-shade)">Your Game Stats</span>
+        </b-nav-item>
+      </b-nav>
+    </b-row>
+    <b-row class="text-center justify-content-center align-items-center">
       <Messages/>
     </b-row>
-
-    <b-row class="text-center h-75">
-      <!-- participate -->
+    <b-row class="w-100 justify-content-center align-items-center my-auto py-4">
       <b-col v-if="view === 'participate'" class="text-center">
         <!-- TOURNAMENT SURVEYS -->
         <template v-if="playerTaskCompletion.mustTakeIntroSurvey || playerTaskCompletion.shouldTakeExitSurvey">
           <b-button-group class="py-3 w-75" vertical>
             <b-button v-if="playerTaskCompletion.mustTakeIntroSurvey" :href="introSurveyUrl" block size="lg" variant="success">
               <h1>
-              <font-awesome-icon class='text-warning' icon="exclamation-triangle"/>
-              Click here to take an intro survey before participating (REQUIRED)
+                <font-awesome-icon class='text-warning' icon="exclamation-triangle"/>
+                Click here to take an intro survey before participating (REQUIRED)
               </h1>
             </b-button>
             <b-button v-if="playerTaskCompletion.shouldTakeExitSurvey" :href="exitSurveyUrl" block size="lg" variant="success">
               <h1>
-              <font-awesome-icon class='text-warning' icon="exclamation-triangle" />
-              Thanks for participating! Please click here to complete an exit survey.
+                <font-awesome-icon class='text-warning' icon="exclamation-triangle" />
+                Thanks for participating! Please click here to complete an exit survey.
               </h1>
             </b-button>
           </b-button-group>
@@ -113,7 +104,6 @@
           </p>
         </b-container>
       </b-col>
-
       <!-- STATS -->
       <b-col v-if="view === 'stats'" class="text-center mt-5">
         <h2 class="text-uppercase">You have participated in <b>{{ gamesPlayedCount }}</b> missions</h2>
@@ -131,6 +121,33 @@
       </b-col>
     </b-row>
   </b-container>
+<!--    <b-navbar fixed toggleable="lg" type="dark" variant="secondary">-->
+<!--      <b-navbar-brand href="#/dashboard"><h4 class="text-uppercase">Player Dashboard</h4></b-navbar-brand>-->
+
+<!--      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>-->
+
+<!--      <b-collapse id="nav-collapse" is-nav>-->
+<!--        <b-navbar-nav class="px-3">-->
+<!--          <b-nav-item @click="switchTab('participate')">Participate</b-nav-item>-->
+<!--          <b-nav-item @click="switchTab('stats')">Your Stats</b-nav-item>-->
+<!--        </b-navbar-nav>-->
+
+<!--        &lt;!&ndash; Right aligned nav items &ndash;&gt;-->
+<!--        <b-navbar-nav class="ml-auto">-->
+
+
+<!--        </b-navbar-nav>-->
+<!--      </b-collapse>-->
+<!--    </b-navbar>-->
+
+
+
+<!--    <b-row class="text-center h-75">-->
+<!--      &lt;!&ndash; participate &ndash;&gt;-->
+<!--      -->
+
+<!--      -->
+<!--    </b-row>-->
 </template>
 
 <script lang="ts">
@@ -143,7 +160,6 @@ import {faGoogle} from '@fortawesome/free-brands-svg-icons/faGoogle';
 import {faRocket} from '@fortawesome/free-solid-svg-icons';
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {REGISTER_PAGE, LOBBY_PAGE, LOGIN_PAGE, SIGNEDUP_PAGE, TUTORIAL_PAGE} from '@port-of-mars/shared/routes';
-
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 import {CalendarEvent, google} from "calendar-link";
 import ActionItem from "@port-of-mars/client/components/dashboard/ActionItem.vue";

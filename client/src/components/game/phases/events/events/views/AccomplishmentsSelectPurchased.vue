@@ -1,21 +1,21 @@
 <template>
-  <b-container fluid>
-    <b-row class="justify-content-center m-2 py-3 text-center">
-      <template v-if="completed">
-        <p class="pb-3"><strong>You have discarded the Accomplishment below:</strong></p>
-      </template>
-      <template v-else class="py-2">
-        <p class="pb-1"><i>{{ marsEvent.flavorText }}</i></p>
-        <p class="pb-3"><strong>{{ marsEvent.effect }}</strong></p>
-      </template>
-      <div v-if="purchasedAccomplishmentsLength < 1" class="mt-3">
-        <b-row class="pt-5">
-          <p>No Purchased Accomplishments. Please click 'Continue'.</p>
-        </b-row>
-        <b-row class="justify-content-center align-items-center pt-3">
+<!--  <b-container fluid class="h-100 p-0 m-0">-->
+    <b-row class="w-100 h-100 m-0 px-0 py-3 justify-content-center align-items-center text-center flex-column">
+      <!-- if player has already discarded an accomplishment they own -->
+      <b-col v-if="completed" class="w-100 m-0 p-0">
+        <p><strong>You have discarded the Accomplishment below:</strong></p>
+      </b-col>
+      <!-- else display event efforts wasted flavor text and effect -->
+      <b-col v-else class="w-100 m-0 p-0">
+        <p><i>{{ marsEvent.flavorText }}</i></p>
+        <p><strong>{{ marsEvent.effect }}</strong></p>
+      </b-col>
+
+      <b-col v-if="purchasedAccomplishmentsLength < 1" class="w-100 m-0 p-0">
+          <p v-if="selectedPurchasedAccomplishment.id === -1">You have no accomplishments to discard.
+            Please click 'Continue'.</p>
           <button class="button" @click="ready">Continue</button>
-        </b-row>
-      </div>
+      </b-col>
       <AccomplishmentCard
         v-for="accomplishment in purchasedAccomplishments"
         v-if="!completed"
@@ -31,7 +31,7 @@
         :accomplishment="accomplishment"
       />
     </b-row>
-  </b-container>
+<!--  </b-container>-->
 </template>
 
 <script lang="ts">

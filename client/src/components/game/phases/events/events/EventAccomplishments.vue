@@ -1,31 +1,26 @@
 <template>
-  <component :is="eventAccomplishmentsView"></component>
+    <component :is="eventAccomplishmentsView"></component>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import AccomplishmentsSelectPurchased from './views/AccomplishmentsSelectPurchased.vue';
+import EffortsWasted from './views/EffortsWasted.vue';
 
 @Component({
   components: {
-    AccomplishmentsSelectPurchased
+    EffortsWasted
   }
 })
 export default class EventAccomplishments extends Vue {
-  @Prop({ default: '' }) private eventView!: string;
+  @Prop({ default: '' }) eventView!: string;
 
   get eventAccomplishmentsView(): string {
     switch (this.eventView) {
-      case 'ACCOMPLISHMENT_SELECT_PURCHASED':
-        return 'AccomplishmentsSelectPurchased';
+      case 'EFFORTS_WASTED':
+        return 'EffortsWasted';
       default:
         return '';
     }
-    return '';
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '@port-of-mars/client/stylesheets/game/phases/events/events/EventAccomplishments.scss';
-</style>

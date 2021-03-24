@@ -238,7 +238,7 @@ export const initialStoreState: State = {
   environment: 'development',
   consent: false,
 
-  // eventView: 'ACCOMPLISHMENT_SELECT_PURCHASED',
+  // eventView: 'EFFORTS_WASTED',
   quizQuestions: [],
   eventCardsVisible: [],
   user: {

@@ -111,7 +111,7 @@ export type EventClientView =
   | 'INFLUENCES_SELECT'
   | 'INFLUENCES_DRAW'
   // EventAccomplishments
-  | 'ACCOMPLISHMENT_SELECT_PURCHASED';
+  | 'EFFORTS_WASTED';
 
 export interface AccomplishmentPurchaseData {
   name: string;

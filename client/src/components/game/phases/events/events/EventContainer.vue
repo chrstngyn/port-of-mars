@@ -1,7 +1,5 @@
 <template>
-  <div class="event-view">
-    <component :is="eventView" :eventView="layout"></component>
-  </div>
+  <component class="w-100 p-0 m-0" :is="eventView" :eventView="layout"></component>
 </template>
 
 <script lang="ts">
@@ -33,7 +31,7 @@ export default class EventContainer extends Vue {
     'INFLUENCES_DRAW'
   ];
   private eventAccomplishmentsViews: Array<EventClientView> = [
-    'ACCOMPLISHMENT_SELECT_PURCHASED'
+    'EFFORTS_WASTED'
   ];
   private eventNoChangeViews: Array<EventClientView> = [
     'NO_CHANGE',
@@ -63,5 +61,4 @@ export default class EventContainer extends Vue {
 
 <style lang="scss" scoped>
 @import '~animate.css/source/attention_seekers/pulse.css';
-@import '@port-of-mars/client/stylesheets/game/phases/events/events/EventContainer.scss';
 </style>

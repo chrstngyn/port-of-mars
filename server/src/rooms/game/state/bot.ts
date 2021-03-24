@@ -126,7 +126,7 @@ export class MarsEventVisitor implements AbstractMarsEventVisitor {
     return [new SelectedInfluence({role: player.role, influence: 'culture'})]
   }
 
-  ACCOMPLISHMENT_SELECT_PURCHASED(state: GameState, player: Player): Array<GameEvent> {
+  EFFORTS_WASTED(state: GameState, player: Player): Array<GameEvent> {
     return [new SetPlayerReadiness({value: true, role: player.role})]
   }
 }

@@ -1,37 +1,40 @@
 <template>
-<!--  <b-container fluid class="h-100 p-0 m-0">-->
-    <b-row class="w-100 h-100 m-0 px-0 py-3 justify-content-center align-items-center text-center flex-column">
-      <!-- if player has already discarded an accomplishment they own -->
-      <b-col v-if="completed" class="w-100 m-0 p-0">
-        <p><strong>You have discarded the Accomplishment below:</strong></p>
-      </b-col>
-      <!-- else display event efforts wasted flavor text and effect -->
-      <b-col v-else class="w-100 m-0 p-0">
-        <p><i>{{ marsEvent.flavorText }}</i></p>
-        <p><strong>{{ marsEvent.effect }}</strong></p>
-      </b-col>
-
-      <b-col v-if="purchasedAccomplishmentsLength < 1" class="w-100 m-0 p-0">
-          <p v-if="selectedPurchasedAccomplishment.id === -1">You have no accomplishments to discard.
-            Please click 'Continue'.</p>
-          <button class="button" @click="ready">Continue</button>
-      </b-col>
-      <AccomplishmentCard
-        v-for="accomplishment in purchasedAccomplishments"
-        v-if="!completed"
-        :key="accomplishment.id"
-        :accomplishment="accomplishment"
-        :type="cardType"
-        @discardPurchased="stageDiscard"
-      />
-      <AccomplishmentCard
-        v-for="accomplishment in selectedPurchasedAccomplishment"
-        v-else
-        :key="accomplishment.id"
-        :accomplishment="accomplishment"
-      />
-    </b-row>
-<!--  </b-container>-->
+  <b-row class="w-100 m-0 px-0 justify-content-center align-items-center flex-column text-center">
+    <!-- if player has already discarded an accomplishment they own -->
+    <b-col v-if="completed" class="w-100 mx-2 p-0">
+      <p><strong>You have discarded the Accomplishment below:</strong></p>
+    </b-col>
+    <!-- else display event efforts wasted flavor text and effect -->
+    <b-col v-else class="w-100 mx-2 p-0">
+      <p><i>{{ marsEvent.flavorText }}</i></p>
+      <p><strong>{{ marsEvent.effect }}</strong></p>
+    </b-col>
+    <!-- if there are no accomplishments to discard -->
+    <b-col v-if="purchasedAccomplishmentsLength < 1" class="w-100 m-0 p-0">
+      <p v-if="selectedPurchasedAccomplishment.id === -1">You have no accomplishments to discard.
+        Please click 'Continue'.</p>
+      <button class="button" @click="ready">Continue</button>
+    </b-col>
+    <!-- display purchased accomplishments that you can discard -->
+    <b-col v-if="purchasedAccomplishmentsLength > 0" class="w-100 m-0 p-0">
+        <AccomplishmentCard
+          v-for="accomplishment in purchasedAccomplishments"
+          v-if="!completed"
+          :key="accomplishment.id"
+          :accomplishment="accomplishment"
+          :show-description="false"
+          :type="cardType"
+          @discardPurchased="stageDiscard"
+        />
+        <AccomplishmentCard
+          v-for="accomplishment in selectedPurchasedAccomplishment"
+          v-else
+          :key="accomplishment.id"
+          :accomplishment="accomplishment"
+          :show-description="false"
+        />
+    </b-col>
+  </b-row>
 </template>
 
 <script lang="ts">
@@ -47,7 +50,7 @@ import _ from 'lodash';
     AccomplishmentCard,
   },
 })
-export default class AccomplishmentsSelectPurchased extends Vue {
+export default class EffortsWasted extends Vue {
   @Inject() readonly api!: GameRequestAPI;
 
 
@@ -102,6 +105,3 @@ export default class AccomplishmentsSelectPurchased extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '@port-of-mars/client/stylesheets/game/phases/events/events/views/AccomplishmentsSelectPurchased.scss';
-</style>

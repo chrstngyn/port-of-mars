@@ -25,11 +25,6 @@ export default class EventInfluences extends Vue {
       default:
         return '';
     }
-    return '';
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '@port-of-mars/client/stylesheets/game/phases/events/events/EventInfluences.scss';
-</style>

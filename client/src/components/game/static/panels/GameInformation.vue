@@ -35,14 +35,17 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Inject } from 'vue-property-decorator';
+import { Vue, Component, Inject } from 'vue-property-decorator';
 import { Phase, PHASE_LABELS } from '@port-of-mars/shared/types';
 import {AbstractGameAPI} from "@port-of-mars/client/api/game/types";
+import readySfx from "@port-of-mars/client/assets/sfx/readyToAdvance.mp3";
 
 @Component({
   components: {},
 })
 export default class GameInformation extends Vue {
+  ready = new Audio(readySfx);
+
   @Inject() private api!: AbstractGameAPI;
 
   get roundNumber() {
@@ -86,9 +89,8 @@ export default class GameInformation extends Vue {
     return this.$tstore.state.timeRemaining < 60 ? 'blink-timer' : 'countdown';
   }
 
-  private submitDone() {
+  submitDone(): any {
     let pendingInvestments;
-
     switch (this.phaseNumber) {
       // FIXME: change to using a queue system where other components can push pending api calls to
       //  queue. Submitting would flush the queue
@@ -98,15 +100,24 @@ export default class GameInformation extends Vue {
         if (currentEvent && currentEvent.id === 'breakdownOfTrust') {
           this.api.saveBreakdownOfTrust(pendingInvestments);
         }
+        this.ready.play();
+        console.log('submitDone');
+        break;
       case Phase.invest:
         pendingInvestments = this.$tstore.getters.player.pendingInvestments;
         this.api.investTimeBlocks(pendingInvestments);
+        this.ready.play();
+        console.log('submitDone');
+        break;
       default:
         this.api.setPlayerReadiness(true);
+        this.ready.play();
+        console.log('submitDone');
+        break;
     }
   }
 
-  private submitCancel() {
+  submitCancel() {
     this.api.setPlayerReadiness(false);
   }
 }

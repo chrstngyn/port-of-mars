@@ -38,7 +38,7 @@
 import { Vue, Component, Inject } from 'vue-property-decorator';
 import { Phase, PHASE_LABELS } from '@port-of-mars/shared/types';
 import {AbstractGameAPI} from "@port-of-mars/client/api/game/types";
-import readySfx from "@port-of-mars/client/assets/sfx/readyToAdvance.mp3";
+import readySfx from "@port-of-mars/client/assets/sfx/readyToAdvance.wav";
 
 @Component({
   components: {},
@@ -101,19 +101,13 @@ export default class GameInformation extends Vue {
           this.api.saveBreakdownOfTrust(pendingInvestments);
         }
         this.ready.play();
-        console.log('submitDone');
-        break;
       case Phase.invest:
         pendingInvestments = this.$tstore.getters.player.pendingInvestments;
         this.api.investTimeBlocks(pendingInvestments);
         this.ready.play();
-        console.log('submitDone');
-        break;
       default:
         this.api.setPlayerReadiness(true);
         this.ready.play();
-        console.log('submitDone');
-        break;
     }
   }
 

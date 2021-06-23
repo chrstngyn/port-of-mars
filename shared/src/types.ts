@@ -320,8 +320,15 @@ export interface DashboardData {
 }
 
 export interface DashboardMessage {
-  kind: 'success' | 'danger' | 'info' | 'warning'
-  message: string
+  kind: 'success' | 'danger' | 'info' | 'warning';
+  message: string;
 }
 
 export type RoomId = string;
+
+export interface Sound {
+  kind: 'event' | 'phase' | 'button' | 'background' | 'notification' |  undefined;
+  audio: HTMLAudioElement | undefined;
+  action?: 'invest' | 'toggle' | undefined;
+  invest?: 'plus' | 'minus' | undefined;
+}

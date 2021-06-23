@@ -38,7 +38,7 @@
 import { Vue, Component, Inject } from 'vue-property-decorator';
 import { Phase, PHASE_LABELS } from '@port-of-mars/shared/types';
 import {AbstractGameAPI} from "@port-of-mars/client/api/game/types";
-import readySfx from "@port-of-mars/client/assets/sfx/button/ready.wav";
+import readySfx from "@port-of-mars/client/assets/sfx/button/ready.mp3";
 
 @Component({
   components: {},

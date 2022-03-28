@@ -81,7 +81,7 @@
 
 <script lang="ts">
 import { Component, Inject, Prop, Vue, Watch } from "vue-property-decorator";
-import { EventClientView, MarsEventData, Phase } from "@port-of-mars/shared/types";
+import { EventCase, MarsEventData, Phase } from "@port-of-mars/shared/types";
 import { GameRequestAPI } from "@port-of-mars/client/api/game/request";
 import EventModal from "@port-of-mars/client/components/game/modals/EventModal.vue";
 import { isUndefined } from "lodash";
@@ -89,7 +89,7 @@ import { isUndefined } from "lodash";
 @Component({
   components: { EventModal }
 })
-export default class EventCard extends Vue {
+export default class Card extends Vue {
   @Inject() readonly api!: GameRequestAPI;
 
   @Prop({
@@ -117,7 +117,7 @@ export default class EventCard extends Vue {
   currentEventModalId!: string;
 
   //determining which type of events require which interactions
-  eventNoChangeViews: Array<EventClientView> = ["NO_CHANGE", "AUDIT", "DISABLE_CHAT"];
+  eventNoChangeViews: Array<EventCase> = ["NO_CHANGE", "AUDIT", "DISABLE_CHAT"];
   modalIds: string[] = [];
 
   mounted() {
@@ -142,7 +142,7 @@ export default class EventCard extends Vue {
   }
 
   get requiresInteraction() {
-    return !this.eventNoChangeViews.includes(this.event.clientViewHandler);
+    return !this.eventNoChangeViews.includes(this.event.eventCaseClientHandler);
   }
 
   async readyUp() {

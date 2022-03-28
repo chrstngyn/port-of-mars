@@ -35,7 +35,7 @@ const steps: Array<Step> = [
           of this round.)`,
           flavorText: `Create contingencies for your contingencies and contingencies for
           those contingencies. Then prepare to improvise.`,
-          clientViewHandler: "NO_CHANGE" as const,
+          eventCaseClientHandler: "NO_CHANGE" as const,
           duration: 1
         }
       }

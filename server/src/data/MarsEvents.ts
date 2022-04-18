@@ -49,7 +49,7 @@ const _marsEvents: Array<MarsEventData> = [
     name: "Compulsive Philanthropy",
     effect: `Players must vote for one player to put all their Time Blocks into System Health this round.`,
     flavorText: `There's nothing quite like being volun-told for the greater good.`,
-    clientViewHandler: "VOTE_PLAYER" as const,
+    eventCaseClientHandler: "VOTE_PLAYER" as const,
     duration: 1,
   },
   {
